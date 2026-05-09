@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Computers</title>
+    <style>
+        /* Brand Colors & Base Styles */
+        :root {
+            --blue: #1D4ED8;
+            --baby-blue: #BFDBFE;
+            --soft-green: #A7F3D0;
+            --black: #111827;
+            --white: #FFFFFF;
+            --gray-light: #F3F4F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--black);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        /* Update the src to your actual uploaded logo filename */
+        .logo {
+            height: 40px;
+            background-color: var(--white);
+            border-radius: 4px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--soft-green);
+        }
+
+        /* Contact Dropdown */
+        .contact-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: var(--blue);
+            color: var(--white);
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: var(--black);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--baby-blue);
+        }
+
+        .contact-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* SPA Sections */
+        .section {
+            display: none;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        #home {
+            text-align: center;
+            background: linear-gradient(135deg, var(--baby-blue) 0%, var(--white) 100%);
+            padding: 5rem 2rem;
+        }
+
+        #home h1 {
+            font-size: 3rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--blue);
+            color: var(--white);
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--black);
+        }
+
+        /* Filters */
+        .filter-bar {
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .filter-bar select, .filter-bar input {
+            padding: 8px;
+            border: 1px solid var(--baby-blue);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        /* Product Grid & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--baby-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            font-size: 0.9rem;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            color: var(--blue);
+            font-weight: bold;
+        }
+
+        .card-code {
+            font-size: 0.85rem;
+            color: #6B7280;
+        }
+
+        .card-delivery {
+            background-color: var(--soft-green);
+            color: var(--black);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header & Navigation -->
+    <header>
+        <div class="logo-container" onclick="navigate('home')">
+            <!-- Replace 'logo.png' with your actual logo file path -->
+            <img src="logo.png" alt="Flex Computers Logo" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span style="display:none; font-weight: bold; font-size: 1.2rem; color: var(--soft-green);">FLEX</span>
+        </div>
+        <nav>
+            <a onclick="navigate('home')">Home</a>
+            <a onclick="navigate('laptops')">Laptops</a>
+            <a onclick="navigate('accessories')">Accessories</a>
+            
+            <div class="contact-dropdown">
+                <button class="dropbtn">Contact Us</button>
+                <div class="dropdown-content">
+                    <a href="mailto:info@flexcomputers.com">Email Us</a>
+                    <a href="https://wa.me/1234567890" target="_blank">WhatsApp Business</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- 1. Home / Hero Section -->
+        <section id="home" class="section active">
+            <h1>Welcome to Flex Computers</h1>
+            <p>Your premium destination for high-performance laptops and cutting-edge accessories.</p>
+            <button class="btn-primary" onclick="navigate('laptops')">Shop Laptops</button>
+        </section>
+
+        <!-- 2. Laptops Section -->
+        <section id="laptops" class="section">
+            <h2 style="margin-bottom: 1rem; color: var(--blue);">Our Laptops</h2>
+            
+            <!-- 4. Filters -->
+            <div class="filter-bar">
+                <select id="brandFilter" onchange="filterProducts()">
+                    <option value="all">All Brands</option>
+                    <option value="Dell">Dell</option>
+                    <option value="Lenovo">Lenovo</option>
+                    <option value="Apple">Apple</option>
+                </select>
+                
+                <select id="priceFilter" onchange="filterProducts()">
+                    <option value="all">All Prices</option>
+                    <option value="low">Under $1000</option>
+                    <option value="high">$1000 & Above</option>
+                </select>
+            </div>
+
+            <!-- Laptop Display Grid -->
+            <div class="grid" id="laptopGrid">
+                <!-- JavaScript will populate this -->
+            </div>
+        </section>
+
+        <!-- 3. Accessories Section -->
+        <section id="accessories" class="section">
+            <h2 style="margin-bottom: 1rem; color: var(--blue);">Accessories</h2>
+            <div class="grid" id="accessoriesGrid">
+                <!-- JavaScript will populate this -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Flex Computers. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts for SPA behavior and mock data -->
+    <script>
+        // SPA Navigation Logic
+        function navigate(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Mock Data for Laptops
+        const laptops = [
+            { brand: 'Dell', name: 'XPS 15', price: 1500, code: 'DL-XPS15-01', delivery: 'Free Next Day Delivery' },
+            { brand: 'Lenovo', name: 'ThinkPad X1', price: 1200, code: 'LN-TPX1-02', delivery: 'Standard Delivery (2-3 days)' },
+            { brand: 'Apple', name: 'MacBook Air M2', price: 999, code: 'AP-MBA-M2', delivery: 'Free Next Day Delivery' },
+            { brand: 'Dell', name: 'Inspiron 14', price: 750, code: 'DL-IN14-04', delivery: 'Standard Delivery (2-3 days)' }
+        ];
+
+        // Mock Data for Accessories
+        const accessories = [
+            { name: 'Logitech MX Master 3', price: 99, code: 'AC-MOU-01', delivery: 'In Stock' },
+            { name: 'USB-C Hub Multiport', price: 45, code: 'AC-HUB-02', delivery: 'In Stock' },
+            { name: 'Laptop Cooling Pad', price: 30, code: 'AC-PAD-03', delivery: 'Low Stock' }
+        ];
+
+        // Render Laptops
+        function renderLaptops(data) {
+            const grid = document.getElementById('laptopGrid');
+            grid.innerHTML = '';
+            
+            if(data.length === 0) {
+                grid.innerHTML = '<p>No laptops match your filters.</p>';
+                return;
+            }
+
+            data.forEach(item => {
+                const card = `
+                    <div class="card">
+                        <div class="card-img">[Product Image Placeholder]</div>
+                        <div class="card-content">
+                            <div class="card-title">${item.brand} ${item.name}</div>
+                            <div class="card-code">Code: ${item.code}</div>
+                            <div class="card-price">$${item.price}</div>
+                            <div class="card-delivery">${item.delivery}</div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Render Accessories
+        function renderAccessories() {
+            const grid = document.getElementById('accessoriesGrid');
+            accessories.forEach(item => {
+                const card = `
+                    <div class="card">
+                        <div class="card-img" style="height:150px; background-color: var(--gray-light);">[Accessory Image]</div>
+                        <div class="card-content">
+                            <div class="card-title">${item.name}</div>
+                            <div class="card-code">Code: ${item.code}</div>
+                            <div class="card-price">$${item.price}</div>
+                            <div class="card-delivery">${item.delivery}</div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Filter Logic
+        function filterProducts() {
+            const brandVal = document.getElementById('brandFilter').value;
+            const priceVal = document.getElementById('priceFilter').value;
+
+            let filtered = laptops;
+
+            // Apply Brand Filter
+            if (brandVal !== 'all') {
+                filtered = filtered.filter(laptop => laptop.brand === brandVal);
+            }
+
+            // Apply Price Filter
+            if (priceVal === 'low') {
+                filtered = filtered.filter(laptop => laptop.price < 1000);
+            } else if (priceVal === 'high') {
+                filtered = filtered.filter(laptop => laptop.price >= 1000);
+            }
+
+            renderLaptops(filtered);
+        }
+
+        // Initialize App
+        window.onload = () => {
+            renderLaptops(laptops);
+            renderAccessories();
+        };
+    </script>
+</body>
+</html>
