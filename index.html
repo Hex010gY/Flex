@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Computers - Premium Laptops & Accessories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="logo-container" onclick="navigate('home')">
+            <img src="logo.png" alt="Flex Computers Logo" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span style="display:none; font-weight: bold; font-size: 1.2rem; color: var(--accent-green);">FLEX</span>
+        </div>
+        <nav>
+            <a onclick="navigate('home')">Home</a>
+            <a onclick="navigate('laptops')">Laptops</a>
+            <a onclick="navigate('accessories')">Accessories</a>
+            
+            <div class="contact-dropdown">
+                <button class="dropbtn">Contact Us</button>
+                <div class="dropdown-content">
+                    <a href="mailto:info@flexcomputers.com">Email Us</a>
+                    <a href="https://wa.me/1234567890" target="_blank">WhatsApp Business</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- Home / Hero Section -->
+        <section id="home" class="section active">
+            <div class="hero-content">
+                <h1>Welcome to Flex Computers</h1>
+                <p>Your premium destination for high-performance laptops and cutting-edge accessories.</p>
+                <button class="btn-primary" onclick="navigate('laptops')">Shop Laptops</button>
+            </div>
+        </section>
+
+        <!-- Laptops Section -->
+        <section id="laptops" class="section">
+            <div class="section-container">
+                <h2>Our Laptops</h2>
+                
+                <!-- Filters -->
+                <div class="filter-bar">
+                    <select id="brandFilter" onchange="filterProducts()">
+                        <option value="all">All Brands</option>
+                        <option value="Dell">Dell</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="Apple">Apple</option>
+                    </select>
+                    
+                    <select id="priceFilter" onchange="filterProducts()">
+                        <option value="all">All Prices</option>
+                        <option value="low">Under $1000</option>
+                        <option value="high">$1000 & Above</option>
+                    </select>
+                </div>
+
+                <!-- Laptop Display Grid -->
+                <div class="grid" id="laptopGrid">
+                    <!-- JavaScript will populate this -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Accessories Section -->
+        <section id="accessories" class="section">
+            <div class="section-container">
+                <h2>Accessories</h2>
+                <div class="grid" id="accessoriesGrid">
+                    <!-- JavaScript will populate this -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Flex Computers. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
