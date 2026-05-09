@@ -461,22 +461,15 @@ main {
 .card-img {
     width: 100%;
     height: 200px;
-    background: linear-gradient(135deg, var(--accent-light-blue) 0%, var(--accent-gray) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-blue);
-    font-size: 0.9rem;
-    font-weight: var(--font-weight-bold);
     object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, var(--accent-light-blue) 0%, var(--accent-gray) 100%);
     position: relative;
+    transition: all var(--transition-base);
 }
 
-.card-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(29, 78, 216, 0.05) 100%);
+.card:hover .card-img {
+    transform: scale(1.05);
 }
 
 .card-content {
