@@ -13,28 +13,32 @@ const laptops = [
         name: 'XPS 15',
         price: 1500,
         code: 'DL-XPS15-01',
-        delivery: 'Free Next Day Delivery'
+        delivery: 'Free Next Day Delivery',
+        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=250&fit=crop'
     },
     {
         brand: 'Lenovo',
         name: 'ThinkPad X1',
         price: 1200,
         code: 'LN-TPX1-02',
-        delivery: 'Standard Delivery (2-3 days)'
+        delivery: 'Standard Delivery (2-3 days)',
+        image: 'https://images.unsplash.com/photo-1588872657840-790ff3bde172?w=400&h=250&fit=crop'
     },
     {
         brand: 'Apple',
         name: 'MacBook Air M2',
         price: 999,
         code: 'AP-MBA-M2',
-        delivery: 'Free Next Day Delivery'
+        delivery: 'Free Next Day Delivery',
+        image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=250&fit=crop'
     },
     {
         brand: 'Dell',
         name: 'Inspiron 14',
         price: 750,
         code: 'DL-IN14-04',
-        delivery: 'Standard Delivery (2-3 days)'
+        delivery: 'Standard Delivery (2-3 days)',
+        image: 'https://images.unsplash.com/photo-1588872657840-790ff3bde172?w=400&h=250&fit=crop'
     }
 ];
 
@@ -43,19 +47,22 @@ const accessories = [
         name: 'Logitech MX Master 3',
         price: 99,
         code: 'AC-MOU-01',
-        delivery: 'In Stock'
+        delivery: 'In Stock',
+        image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=250&fit=crop'
     },
     {
         name: 'USB-C Hub Multiport',
         price: 45,
         code: 'AC-HUB-02',
-        delivery: 'In Stock'
+        delivery: 'In Stock',
+        image: 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=250&fit=crop'
     },
     {
         name: 'Laptop Cooling Pad',
         price: 30,
         code: 'AC-PAD-03',
-        delivery: 'Low Stock'
+        delivery: 'Low Stock',
+        image: 'https://images.unsplash.com/photo-1587829191301-0151e96e3879?w=400&h=250&fit=crop'
     }
 ];
 
@@ -153,9 +160,7 @@ function createProductCard(item, type = 'laptop') {
 
     return `
         <div class="card" role="article" tabindex="0">
-            <div class="card-img" aria-label="Product image placeholder">
-                [Product Image Placeholder]
-            </div>
+            <img src="${item.image}" alt="${title}" class="card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Product+Image'">
             <div class="card-content">
                 <div class="card-title">${title}</div>
                 <div class="card-code">Code: ${escapeHTML(item.code)}</div>
